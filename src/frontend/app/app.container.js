@@ -1,21 +1,26 @@
 // Core imports
 import {connect} from 'react-redux';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React, { Component } from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {bindActionCreators} from 'redux';
 
+// Material-ui
+import LinearProgress from 'material-ui/LinearProgress';
+
+// Components
 import DevTools from './shared/devtools';
 import HeaderContainer from './shared/header/header.container';
 import LeftMenuComponent from './shared/left-menu.component';
 import ButtonMenuComponent from './shared/buttons/button-menu.component';
 
+// Redux
 import * as AppActions from './app.actions';
 import { routeToContacts } from './pages/contacts/contacts.actions';
 
+// Styles
 import './app.container.css';
 
-class App extends Component {
+export class AppContainer extends Component {
   static path = '/';
 
   constructor(props) {
@@ -39,37 +44,43 @@ class App extends Component {
       },
     ];
 
-    return(<MuiThemeProvider>
-      <div id="app-container" className="container">
-        <LeftMenuComponent
-          items={menuItems}
-          isOpen={this.props.app.isLeftMenuOpen}
-          handleSwitch={this.props.appActions.switchLeftMenu}
-        />
+    return(
+        <div id="app-container" className="container">
+          <LeftMenuComponent
+            items={menuItems}
+            isOpen={this.props.app.isLeftMenuOpen}
+            handleSwitch={this.props.appActions.switchLeftMenu}
+          />
 
-        <HeaderContainer
-          buttonLeft={this.state.headerButtonLeft}
-          buttonRight={this.state.headerButtonRight}
-        />
-
-        <main className="row">
-          <div id="app-content" className="col-xs-12 col-md-12">
-            {/* { this.props.children } */}
-            {
-              React.cloneElement(
-                this.props.children,
-                {
-                  setHeaderButtons: ::this.setHeaderButtons,
-                  setHeaderButtonLeft: ::this.setHeaderButtonLeft,
-                  setHeaderButtonRight: ::this.setHeaderButtonRight,
-                }
-              )
-            }
+          <HeaderContainer
+            buttonLeft={this.state.headerButtonLeft}
+            buttonRight={this.state.headerButtonRight}
+          />
+          
+          <div className="row">
+            <div className="col-xs-12" id="progressbar-wrapper">
+              <LinearProgress mode="determinate" value={50} />
+            </div>
           </div>
-        </main>
-        { NODE_ENV === 'development' ? <DevTools /> : null }
-      </div>
-    </MuiThemeProvider>);
+
+          <main className="row">
+            <div id="app-content" className="col-xs-12 col-md-12">
+              {/* { this.props.children } */}
+              {
+                React.cloneElement(
+                  this.props.children,
+                  {
+                    setHeaderButtons: ::this.setHeaderButtons,
+                    setHeaderButtonLeft: ::this.setHeaderButtonLeft,
+                    setHeaderButtonRight: ::this.setHeaderButtonRight,
+                  }
+                )
+              }
+            </div>
+          </main>
+          { NODE_ENV === 'development' ? <DevTools /> : null }
+        </div>
+    );
   }
 
   setHeaderButtons(headerButtonLeft, headerButtonRight) {
@@ -104,4 +115,4 @@ function mapDisptachToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDisptachToProps)(App);
+export default connect(mapStateToProps, mapDisptachToProps)(AppContainer);

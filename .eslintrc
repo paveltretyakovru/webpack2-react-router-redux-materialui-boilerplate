@@ -38,8 +38,11 @@
         // Jest
         "it": true,
         "test": true,
-        "expect": true,
         "describe": true,
-        "beforeEach": true
+        "beforeEach": true,
+        "jestExpect": true,
+        
+        // Chai
+        "expect": true
     }
 }

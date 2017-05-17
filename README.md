@@ -1,8 +1,9 @@
-# React mentoring application
+# Webpack2 React Router Redux Materialui Boilerplate simple application
 
 ## Installing
 ```
 $ npm install
+$ bower install
 ```
 
 ## Run

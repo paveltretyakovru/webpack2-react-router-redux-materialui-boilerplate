@@ -1,0 +1,20 @@
+{
+  "name": "ebpack2-react-router-redux-materialui-boilerplate",
+  "description": "",
+  "main": "webpack.config.js",
+  "authors": [
+    "Tretyakov Pavel <1@tretyakovpavel.ru>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ptretyakov/ebpack2-react-router-redux-materialui-boilerplate",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "flexboxgrid": "^6.3.2"
+  }
+}
